@@ -23,7 +23,7 @@ public class Reader {
 		writer.close();
 	}
 
-	public static String[] readDoc(String filePath) throws IOException {
+	public static ArrayList<String> readDocRoads(String filePath) throws IOException {
 		URL url = RoadRage.class.getResource(filePath);
 		ArrayList<String> lines = new ArrayList<String>();
 		Scanner scan = null;
@@ -35,13 +35,14 @@ public class Reader {
 		while (scan.hasNext()) {
 			lines.add(scan.nextLine());
 		}
-		int i = 0;
-		String[] temp = new String[lines.size()];
-		for (String s : lines) {
-			temp[i] = s;
-			i++;
-		}
 		scan.close();
-		return temp;
+		for (String s : lines) {
+			if (s.contains("--") || s.isEmpty()) {
+				lines.remove(s);
+			} else{
+				System.out.println(s);
+			}
+		}
+		return lines;
 	}
 }
