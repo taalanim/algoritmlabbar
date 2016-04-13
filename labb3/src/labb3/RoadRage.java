@@ -20,10 +20,15 @@ public class RoadRage {
 
 	private void doTheThing() {
 		ArrayList<String> connected = new ArrayList<String>();
+		int totalRange = 0;
 
 		for (Road r : roads) {
 			if (!r.shouldAdd(connected)) {
 				roads.remove(r);
+			}
+			else{
+				totalRange = totalRange + r.getrange();
+				
 			}
 		}
 

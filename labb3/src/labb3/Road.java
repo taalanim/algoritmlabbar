@@ -58,4 +58,9 @@ public class Road implements Comparable {
 
 		return true;
 	}
+
+	public int getrange() {
+		// TODO Auto-generated method stub
+		return range;
+	}
 }
