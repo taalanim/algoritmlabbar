@@ -33,30 +33,24 @@ public class Road implements Comparable {
 
 	}
 
-	public boolean shouldAdd(ArrayList<String> connected) {
-		boolean firstPoint = false;
-		boolean secondPoint = false;
+	public boolean shouldAdd(ArrayList<String> cities, ArrayList<Integer> groups) {
 
-		for (String s : connected) {
-			if (!firstPoint) {
-				firstPoint = s.equals(endpoint1);
+		int aGrouping = groups.get(cities.indexOf(endpoint1));
+		int bGrouping = groups.get(cities.indexOf(endpoint2));
+
+		if (aGrouping == bGrouping) {
+			return false;
+		} else {
+			for (int toCheck : groups) {
+				if (toCheck == bGrouping) {
+					toCheck = aGrouping;
+
+				}
 			}
-			if (!secondPoint) {
-				secondPoint = s.equals(endpoint2);
-			}
-			if (firstPoint && secondPoint) {
-				return false;
-			}
+
+			return true;
 		}
 
-		if (!firstPoint) {
-			connected.add(endpoint1);
-		}
-		if (!secondPoint) {
-			connected.add(endpoint2);
-		}
-
-		return true;
 	}
 
 	public int getrange() {
@@ -64,3 +58,17 @@ public class Road implements Comparable {
 		return range;
 	}
 }
+
+/*
+ * public boolean shouldAdd(ArrayList<String> connected) { boolean firstPoint =
+ * false; boolean secondPoint = false;
+ * 
+ * for (String s : connected) { if (!firstPoint) { firstPoint =
+ * s.equals(endpoint1); } if (!secondPoint) { secondPoint = s.equals(endpoint2);
+ * } if (firstPoint && secondPoint) { return false; } }
+ * 
+ * if (!firstPoint) { connected.add(endpoint1); } if (!secondPoint) {
+ * connected.add(endpoint2); }
+ * 
+ * return true; }
+ */
