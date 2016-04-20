@@ -25,6 +25,7 @@ public class Reader {
 
 	public static ArrayList<String> readDocRoads(String filePath) throws IOException {
 		URL url = RoadRage.class.getResource(filePath);
+		String currentLine = "null";
 		ArrayList<String> lines = new ArrayList<String>();
 		Scanner scan = null;
 		try {
@@ -33,16 +34,32 @@ public class Reader {
 			e.printStackTrace();
 		}
 		while (scan.hasNext()) {
-			lines.add(scan.nextLine());
-		}
-		scan.close();
-		for (String s : lines) {
-			if (s.contains("--") || s.isEmpty()) {
-				lines.remove(s);
-			} else{
-				System.out.println(s);
+			currentLine = scan.nextLine();
+			if (currentLine.contains("--")) {
+				lines.add(currentLine);
 			}
 		}
+		scan.close();
+		return lines;
+	}
+
+	public static ArrayList<String> readDocCities(String filePath) throws IOException {
+		URL url = RoadRage.class.getResource(filePath);
+		String currentLine = "null";
+		ArrayList<String> lines = new ArrayList<String>();
+		Scanner scan = null;
+		try {
+			scan = new Scanner(new File(url.toURI()));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		while (scan.hasNext()) {
+			currentLine = scan.nextLine();
+			if (!currentLine.contains("--")&& !currentLine.isEmpty()) {
+				lines.add(currentLine);
+			}
+		}
+		scan.close();
 		return lines;
 	}
 }
